@@ -7,42 +7,43 @@
   <script defer src="script.js"></script>
   <title>Calculator</title>
 </head>
-<body>
-  <div class="calculator">
+<body class="flex justify-content">
+  <div class="calculator flex">
 
-    <div class="equation-display"></div>
-    <div class="num-display">0</div>
-    <div class="pad">
+    <div class="equation-display"><p>Equation</p></div>
+    <div class="num-display"><h1>0</h1></div>
+    
+    <div class="pad flex justify-content">
       <div class="num-pad">
-        <div class="nums">
+        <div class="nums flex">
           <button class="num">7</button>
           <button class="num">8</button>
           <button class="num">9</button>
         </div>
-        <div class="nums">
+        <div class="nums flex">
           <button class="num">4</button>
           <button class="num">5</button>
           <button class="num">6</button>
         </div>
-        <div class="nums">
+        <div class="nums flex">
           <button class="num">1</button>
           <button class="num">2</button>
           <button class="num">3</button>
         </div>
-        <div class="nums">
+        <div class="nums flex">
           <button class="num">0</button>
           <button class="num">.</button>
           <button class="num">AC</button>
         </div>
       </div>
-      <div class="operator-pad">
-        <div class="operators">
+      <div class="operator-pad flex">
+        <div class="operators flex">
           <button class="operator">➗</button>
           <button class="operator">✖️</button>
           <button class="operator">➖</button>
           <button class="operator">➕</button>
         </div>
-        <div class="extra-operators">
+        <div class="extra-operators flex align-items">
           <button class="toWords">T</button>
           <button class="toRomanNum">IV</button>
           <button class="equal">=</button>
