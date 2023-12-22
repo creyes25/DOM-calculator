@@ -3,11 +3,10 @@ const numDisplay = document.querySelector('.display')
 const equationDisplay = document.querySelector('.equation')
 const operators = document.querySelectorAll('.operator')
 
-let num1, num2
-let operator = '/'
+let num1, num2, operatorUsed
+let operatorInUse = false
 
 
-console.log(operators)
 
 
 numbers.forEach(num => {
@@ -21,12 +20,35 @@ numbers.forEach(num => {
         numDisplay.innerHTML = numDisplay.innerHTML.slice(1)
       }
     }
+
+    if (operatorInUse) {
+      numDisplay.innerHTML = value
+      operatorInUse = false
+    }
+
   })
 })
 
 
-// when an operator is clicked ...
-  // save the number 
-  // cleare display
-  // save operator saved
+
+function gettingOperator (e) {
+  num1 = parseInt(numDisplay.innerHTML)
+
+  if (e.target.className.includes('divide')) {
+    operatorUsed = '/'
+    
+  } else if (e.target.className.includes('multiply')) {
+    operatorUsed = '*'
+  } else if (e.target.className.includes('minus')) {
+    operatorUsed = '-'
+  } else if (e.target.className.includes('add')) {
+    operatorUsed = '+'
+  }
+
+  operatorInUse = true
+}
+
+operators.forEach(operator => {
+  operator.addEventListener('click', gettingOperator)
+})
 
