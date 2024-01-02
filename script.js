@@ -10,6 +10,7 @@ let operatorInUse = false
 let equalHasBeenUsed = false
 
 
+
 numbers.forEach(num => {
   num.addEventListener('click', (e) => {
     let value = (e.target.innerHTML)
@@ -21,6 +22,8 @@ numbers.forEach(num => {
         numDisplay.innerHTML = numDisplay.innerHTML.slice(1)
       }
     }
+
+    equationDisplay.innerHTML += value
 
     if (operatorInUse) {
       numDisplay.innerHTML = value
@@ -39,7 +42,7 @@ numbers.forEach(num => {
 
 function gettingOperator (e) {
   num1 = parseFloat(numDisplay.innerHTML)
-  console.log(num1, 'num1')
+  // console.log(num1, 'num1')
 
   if (e.target.className.includes('divide')) {
     operatorUsed = '/'
@@ -51,6 +54,11 @@ function gettingOperator (e) {
     operatorUsed = '+'
   }
 
+  // const operatorWasChanged = 
+  const lastStringOfEquation = equationDisplay.innerHTML[equationDisplay.innerHTML.length - 1]
+
+  equationDisplay.innerHTML += operatorUsed
+
   operatorInUse = true
 }
 
@@ -61,7 +69,7 @@ operators.forEach(operator => {
 
 equalBtn.addEventListener('click', () => {
   num2 = parseFloat(numDisplay.innerHTML)
-  console.log(num2, 'num2')
+  // console.log(num2, 'num2')
   if (operatorUsed === '+') {
     numDisplay.innerHTML = Math.round((num1 + num2) * 100) / 100
   }else if (operatorUsed === '-') {
