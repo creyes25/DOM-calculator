@@ -9,10 +9,9 @@ let operatorInUse = false
 let equalHasBeenUsed = false
 
 
-
 numbers.forEach(num => {
   num.addEventListener('click', (e) => {
-    let value = parseInt(e.target.innerHTML)
+    let value = (e.target.innerHTML)
 
     numDisplay.innerHTML += value
 
@@ -38,7 +37,8 @@ numbers.forEach(num => {
 
 
 function gettingOperator (e) {
-  num1 = parseInt(numDisplay.innerHTML)
+  num1 = parseFloat(numDisplay.innerHTML)
+  console.log(num1, 'num1')
 
   if (e.target.className.includes('divide')) {
     operatorUsed = '/'
@@ -59,15 +59,16 @@ operators.forEach(operator => {
 
 
 equalBtn.addEventListener('click', () => {
-  num2 = parseInt(numDisplay.innerHTML)
+  num2 = parseFloat(numDisplay.innerHTML)
+  console.log(num2, 'num2')
   if (operatorUsed === '+') {
-    numDisplay.innerHTML = num1 + num2
+    numDisplay.innerHTML = Math.round((num1 + num2) * 100) / 100
   }else if (operatorUsed === '-') {
-    numDisplay.innerHTML = num1 - num2
+    numDisplay.innerHTML = Math.round((num1 - num2) * 100) / 100
   }else if (operatorUsed === '/') {
-    numDisplay.innerHTML = num1 / num2
+    numDisplay.innerHTML = Math.round((num1 / num2) * 100) / 100
   }else if (operatorUsed === '*') {
-    numDisplay.innerHTML = num1 * num2
+    numDisplay.innerHTML = Math.round((num1 * num2) * 100) / 100
   }
 
   equalHasBeenUsed = true
