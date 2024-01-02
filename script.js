@@ -3,6 +3,7 @@ const numDisplay = document.querySelector('.display')
 const equationDisplay = document.querySelector('.equation')
 const operators = document.querySelectorAll('.operator')
 const equalBtn = document.querySelector('.equal')
+const reset = document.querySelector('.reset')
 
 let num1, num2, operatorUsed
 let operatorInUse = false
@@ -75,5 +76,9 @@ equalBtn.addEventListener('click', () => {
 })
 
 
-
+reset.addEventListener('click', () => {
+  num1 = 0
+  num2 = 0
+  numDisplay.innerHTML = 0
+})
 
