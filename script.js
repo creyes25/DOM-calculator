@@ -2,10 +2,11 @@ const numbers = document.querySelectorAll('.num')
 const numDisplay = document.querySelector('.display')
 const equationDisplay = document.querySelector('.equation')
 const operators = document.querySelectorAll('.operator')
+const equalBtn = document.querySelector('.equal')
 
 let num1, num2, operatorUsed
 let operatorInUse = false
-
+let equalHasBeenUsed = false
 
 
 
@@ -26,6 +27,11 @@ numbers.forEach(num => {
       operatorInUse = false
     }
 
+    if (equalHasBeenUsed) {
+      numDisplay.innerHTML = value
+      equalHasBeenUsed = false
+    }
+
   })
 })
 
@@ -36,7 +42,6 @@ function gettingOperator (e) {
 
   if (e.target.className.includes('divide')) {
     operatorUsed = '/'
-    
   } else if (e.target.className.includes('multiply')) {
     operatorUsed = '*'
   } else if (e.target.className.includes('minus')) {
@@ -51,4 +56,23 @@ function gettingOperator (e) {
 operators.forEach(operator => {
   operator.addEventListener('click', gettingOperator)
 })
+
+
+equalBtn.addEventListener('click', () => {
+  num2 = parseInt(numDisplay.innerHTML)
+  if (operatorUsed === '+') {
+    numDisplay.innerHTML = num1 + num2
+  }else if (operatorUsed === '-') {
+    numDisplay.innerHTML = num1 - num2
+  }else if (operatorUsed === '/') {
+    numDisplay.innerHTML = num1 / num2
+  }else if (operatorUsed === '*') {
+    numDisplay.innerHTML = num1 * num2
+  }
+
+  equalHasBeenUsed = true
+})
+
+
+
 
