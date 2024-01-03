@@ -41,6 +41,55 @@ const numToWords = {
   90: 'ninety',
 }
 
+function gettingOperator (e) {
+  num1 = parseFloat(numDisplay.innerHTML)
+  
+  if (e.target.className.includes('divide')) {
+    operatorUsed = '/'
+  } else if (e.target.className.includes('multiply')) {
+    operatorUsed = '*'
+  } else if (e.target.className.includes('minus')) {
+    operatorUsed = '-'
+  } else if (e.target.className.includes('add')) {
+    operatorUsed = '+'
+  }
+  
+  equationDisplay.innerHTML[equationDisplay.innerHTML.length - 1]
+  
+  equationDisplay.innerHTML += operatorUsed
+  
+  operatorInUse = true
+}
+
+function convertToWords(num) {
+  if (num in numToWords) return numToWords[num]
+  
+  let word = ''
+  
+  if(num > 20000) return 'Number too large'
+  if (num >= 1000 && num <= 20000) {
+    word += convertToWords(Math.floor(num / 1000)) + " thousand "
+    num %= 1000
+  } else if (num >= 100 && num < 1000) {
+    word += convertToWords(Math.floor(num / 100)) + " hundred"
+    num %= 100
+    
+    if (num > 0) word += ' and '
+  }
+  
+  if (num > 0) {
+    if (num <= 20) {
+      word += convertToWords(num)
+    } else {
+      word += convertToWords(Math.floor(num / 10) * 10)
+      
+      if (num % 10 > 0) word += '-' + convertToWords(num % 10)
+    }
+}
+
+return word
+}
+
 numbers.forEach(num => {
   num.addEventListener('click', (e) => {
     let value = (e.target.innerHTML)
@@ -68,31 +117,9 @@ numbers.forEach(num => {
   })
 })
 
-
-function gettingOperator (e) {
-  num1 = parseFloat(numDisplay.innerHTML)
-
-  if (e.target.className.includes('divide')) {
-    operatorUsed = '/'
-  } else if (e.target.className.includes('multiply')) {
-    operatorUsed = '*'
-  } else if (e.target.className.includes('minus')) {
-    operatorUsed = '-'
-  } else if (e.target.className.includes('add')) {
-    operatorUsed = '+'
-  }
-
-  equationDisplay.innerHTML[equationDisplay.innerHTML.length - 1]
-
-  equationDisplay.innerHTML += operatorUsed
-
-  operatorInUse = true
-}
-
 operators.forEach(operator => {
   operator.addEventListener('click', gettingOperator)
 })
-
 
 equalBtn.addEventListener('click', () => {
   num2 = parseFloat(numDisplay.innerHTML)
@@ -110,42 +137,12 @@ equalBtn.addEventListener('click', () => {
   equalHasBeenUsed = true
 })
 
-
 reset.addEventListener('click', () => {
   num1 = 0
   num2 = 0
   numDisplay.innerHTML = 0
   equationDisplay.innerHTML = ''
 })
-
-function convertToWords(num) {
-  if (num in numToWords) return numToWords[num]
-  
-  let word = ''
-  
-  if(num > 20000) return 'Number too large'
-  if (num >= 1000 && num <= 20000) {
-    word += convertToWords(Math.floor(num / 1000)) + " thousand "
-    num %= 1000
-  } else if (num >= 100 && num < 1000) {
-    word += convertToWords(Math.floor(num / 100)) + " hundred"
-    num %= 100
-    
-    if (num > 0) word += ' and '
-  }
-  
-  if (num > 0) {
-    if (num <= 20) {
-      word += convertToWords(num)
-    } else {
-        word += convertToWords(Math.floor(num / 10) * 10)
-    
-        if (num % 10 > 0) word += '-' + convertToWords(num % 10)
-    }
-  }
-  return word
-}
-
 
 toWords.addEventListener('click', () => {
   const numToConvert = parseInt(numDisplay.innerHTML)
