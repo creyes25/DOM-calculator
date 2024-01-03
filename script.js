@@ -9,6 +9,7 @@ const toWords = document.querySelector('.toWords')
 let num1, num2, operatorUsed
 let operatorInUse = false
 let equalHasBeenUsed = false
+let numConversionUsed = false
 
 const numToWords = {
   0: 'zero',
@@ -63,11 +64,11 @@ function gettingOperator (e) {
 
 function convertToWords(num) {
   if (num in numToWords) return numToWords[num]
+  if(num > 20000) return 'Number too large'
   
   let word = ''
   
-  if(num > 20000) return 'Number too large'
-  if (num >= 1000 && num <= 20000) {
+  if (num >= 1000) {
     word += convertToWords(Math.floor(num / 1000)) + " thousand "
     num %= 1000
   } else if (num >= 100 && num < 1000) {
@@ -114,6 +115,12 @@ numbers.forEach(num => {
       equalHasBeenUsed = false
     }
 
+    if (numConversionUsed) {
+      equationDisplay.innerHTML = value
+      numDisplay.innerHTML = value
+      numConversionUsed = false
+    }
+
   })
 })
 
@@ -123,7 +130,7 @@ operators.forEach(operator => {
 
 equalBtn.addEventListener('click', () => {
   num2 = parseFloat(numDisplay.innerHTML)
-  // console.log(num2, 'num2')
+
   if (operatorUsed === '+') {
     numDisplay.innerHTML = Math.round((num1 + num2) * 100) / 100
   }else if (operatorUsed === '-') {
@@ -149,4 +156,5 @@ toWords.addEventListener('click', () => {
   const wordConverted = convertToWords(numToConvert)
 
   numDisplay.innerHTML = wordConverted
+  numConversionUsed = true
 })
