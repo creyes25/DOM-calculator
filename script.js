@@ -62,6 +62,22 @@ function gettingOperator (e) {
   operatorInUse = true
 }
 
+function calculation () {
+  num2 = parseFloat(numDisplay.innerHTML)
+  console.log(num2)
+  if (operatorUsed === '+') {
+    numDisplay.innerHTML = Math.round((num1 + num2) * 100) / 100
+  }else if (operatorUsed === '-') {
+    numDisplay.innerHTML = Math.round((num1 - num2) * 100) / 100
+  }else if (operatorUsed === '/') {
+    numDisplay.innerHTML = Math.round((num1 / num2) * 100) / 100
+  }else if (operatorUsed === '*') {
+    numDisplay.innerHTML = Math.round((num1 * num2) * 100) / 100
+  }
+
+  equalHasBeenUsed = true
+}
+
 function convertToWords(num) {
   if (num in numToWords) return numToWords[num]
   if(num > 20000) return 'Number too large'
@@ -128,21 +144,7 @@ operators.forEach(operator => {
   operator.addEventListener('click', gettingOperator)
 })
 
-equalBtn.addEventListener('click', () => {
-  num2 = parseFloat(numDisplay.innerHTML)
-
-  if (operatorUsed === '+') {
-    numDisplay.innerHTML = Math.round((num1 + num2) * 100) / 100
-  }else if (operatorUsed === '-') {
-    numDisplay.innerHTML = Math.round((num1 - num2) * 100) / 100
-  }else if (operatorUsed === '/') {
-    numDisplay.innerHTML = Math.round((num1 / num2) * 100) / 100
-  }else if (operatorUsed === '*') {
-    numDisplay.innerHTML = Math.round((num1 * num2) * 100) / 100
-  }
-
-  equalHasBeenUsed = true
-})
+equalBtn.addEventListener('click', calculation)
 
 reset.addEventListener('click', () => {
   num1 = 0
