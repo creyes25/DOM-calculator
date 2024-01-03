@@ -4,6 +4,7 @@ const equationDisplay = document.querySelector('.equation')
 const operators = document.querySelectorAll('.operator')
 const equalBtn = document.querySelector('.equal')
 const reset = document.querySelector('.reset')
+const toWords = document.querySelector('.toWords')
 
 let num1, num2, operatorUsed
 let operatorInUse = false
@@ -68,10 +69,8 @@ numbers.forEach(num => {
 })
 
 
-
 function gettingOperator (e) {
   num1 = parseFloat(numDisplay.innerHTML)
-  // console.log(num1, 'num1')
 
   if (e.target.className.includes('divide')) {
     operatorUsed = '/'
@@ -83,7 +82,7 @@ function gettingOperator (e) {
     operatorUsed = '+'
   }
 
-  const lastStringOfEquation = equationDisplay.innerHTML[equationDisplay.innerHTML.length - 1]
+  equationDisplay.innerHTML[equationDisplay.innerHTML.length - 1]
 
   equationDisplay.innerHTML += operatorUsed
 
@@ -119,3 +118,38 @@ reset.addEventListener('click', () => {
   equationDisplay.innerHTML = ''
 })
 
+function convertToWords(num) {
+  if (num in numToWords) return numToWords[num]
+  
+  let word = ''
+  
+  if(num > 20000) return 'Number too large'
+  if (num >= 1000 && num <= 20000) {
+    word += convertToWords(Math.floor(num / 1000)) + " thousand "
+    num %= 1000
+  } else if (num >= 100 && num < 1000) {
+    word += convertToWords(Math.floor(num / 100)) + " hundred"
+    num %= 100
+    
+    if (num > 0) word += ' and '
+  }
+  
+  if (num > 0) {
+    if (num <= 20) {
+      word += convertToWords(num)
+    } else {
+        word += convertToWords(Math.floor(num / 10) * 10)
+    
+        if (num % 10 > 0) word += '-' + convertToWords(num % 10)
+    }
+  }
+  return word
+}
+
+
+toWords.addEventListener('click', () => {
+  const numToConvert = parseInt(numDisplay.innerHTML)
+  const wordConverted = convertToWords(numToConvert)
+
+  numDisplay.innerHTML = wordConverted
+})
