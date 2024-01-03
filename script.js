@@ -88,5 +88,6 @@ reset.addEventListener('click', () => {
   num1 = 0
   num2 = 0
   numDisplay.innerHTML = 0
+  equationDisplay.innerHTML = ''
 })
 
