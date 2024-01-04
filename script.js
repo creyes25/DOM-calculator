@@ -5,6 +5,7 @@ const operators = document.querySelectorAll('.operator')
 const equalBtn = document.querySelector('.equal')
 const reset = document.querySelector('.reset')
 const toWords = document.querySelector('.toWords')
+const toRomanNum = document.querySelector('.toRomanNum')
 
 let num1, num2, operatorUsed
 let operatorInUse = false
@@ -42,7 +43,7 @@ const numToWords = {
   90: 'ninety',
 }
 
-const convertToRoman = {
+const toRoman = {
   'M' : 1000,
   'CM' : 900,
   'D' : 500,
@@ -123,8 +124,16 @@ function convertToWords(num) {
 return word
 }
 
-function convertToRoman() {
-
+function numToRoman (num) {
+  if (num > 1000) return 'Number to Large'
+  let romanNumeral = ''
+  
+  for (roman in toRoman) {
+    romanNumeral += roman.repeat(Math.floor(num / toRoman[roman]))
+    num %= toRoman[roman]
+  }
+  
+  return romanNumeral
 }
 
 numbers.forEach(num => {
@@ -178,5 +187,13 @@ toWords.addEventListener('click', () => {
   const wordConverted = convertToWords(numToConvert)
 
   numDisplay.innerHTML = wordConverted
+  numConversionUsed = true
+})
+
+toRomanNum.addEventListener('click', () => {
+  const numToConvert = parseInt(numDisplay.innerHTML)
+  const numConverted = numToRoman(numToConvert)
+
+  numDisplay.innerHTML = numConverted
   numConversionUsed = true
 })
