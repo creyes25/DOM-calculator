@@ -35,7 +35,6 @@ button {
 .calculator {
   margin-top: 15vh;
   color: white;
-  /* border: 1px solid black; */
   width: 375px;
   height: 510px;
   flex-direction: column;
@@ -67,8 +66,6 @@ button {
   font-size: 2.4em;
 }
 
-
-
 .equation-display {
   color: rgba(255, 255, 255, 0.656);
 }
@@ -78,7 +75,6 @@ button {
   padding: 8px;
   margin: auto;
 }
-
 
 .num, .operator, .toWords, .toRomanNum, .decimal, .reset {
   width: 55px;
