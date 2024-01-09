@@ -7,6 +7,7 @@ const reset = document.querySelector('.reset')
 const toWords = document.querySelector('.toWords')
 const toRomanNum = document.querySelector('.toRomanNum')
 
+
 let num1, num2, operatorUsed
 let operatorInUse = false
 let equalHasBeenUsed = false
@@ -180,12 +181,16 @@ reset.addEventListener('click', () => {
   num2 = 0
   numDisplay.innerHTML = 0
   equationDisplay.innerHTML = ''
+  numDisplay.style.fontSize = '2.4em'
 })
 
 toWords.addEventListener('click', () => {
   const numToConvert = parseInt(numDisplay.innerHTML)
   const wordConverted = convertToWords(numToConvert)
 
+  if (wordConverted.length > 25) {
+    numDisplay.style.fontSize = '1.6em'
+  }
   numDisplay.innerHTML = wordConverted
   numConversionUsed = true
 })
@@ -193,7 +198,6 @@ toWords.addEventListener('click', () => {
 toRomanNum.addEventListener('click', () => {
   const numToConvert = parseInt(numDisplay.innerHTML)
   const numConverted = numToRoman(numToConvert)
-
   numDisplay.innerHTML = numConverted
   numConversionUsed = true
 })
