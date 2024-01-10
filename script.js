@@ -10,8 +10,10 @@ const toRomanNum = document.querySelector('.toRomanNum')
 
 let num1, num2, operatorUsed
 let operatorInUse = false
+let hasDecimal = false
 let equalHasBeenUsed = false
 let numConversionUsed = false
+
 
 const numToWords = {
   0: 'zero',
@@ -61,6 +63,7 @@ const toRoman = {
 }
 
 function gettingOperator (e) {
+  hasDecimal = false
   num1 = parseFloat(numDisplay.innerHTML)
   
   if (e.target.className.includes('divide')) {
@@ -73,16 +76,16 @@ function gettingOperator (e) {
     operatorUsed = '+'
   }
   
-  equationDisplay.innerHTML[equationDisplay.innerHTML.length - 1]
-  
   equationDisplay.innerHTML += operatorUsed
   
   operatorInUse = true
+  
+
 }
 
 function calculation () {
   num2 = parseFloat(numDisplay.innerHTML)
-  console.log(num2)
+
   if (operatorUsed === '+') {
     numDisplay.innerHTML = Math.round((num1 + num2) * 100) / 100
   }else if (operatorUsed === '-') {
@@ -140,6 +143,10 @@ function numToRoman (num) {
 numbers.forEach(num => {
   num.addEventListener('click', (e) => {
     let value = (e.target.innerHTML)
+
+    if (value === '.' && hasDecimal) return
+    if(value === '.' && !hasDecimal) hasDecimal = true;
+  
 
     numDisplay.innerHTML += value
 
