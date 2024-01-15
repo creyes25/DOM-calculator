@@ -84,16 +84,21 @@ function gettingOperator (e) {
 }
 
 function calculation () {
+  hasDecimal = false
   num2 = parseFloat(numDisplay.innerHTML)
 
   if (operatorUsed === '+') {
-    numDisplay.innerHTML = Math.round((num1 + num2) * 100) / 100
+    // numDisplay.innerHTML = Math.round((num1 + num2) * 100) / 100
+    numDisplay.innerHTML = (num1 + num2).toFixed(2)
   }else if (operatorUsed === '-') {
-    numDisplay.innerHTML = Math.round((num1 - num2) * 100) / 100
+    // numDisplay.innerHTML = Math.round((num1 - num2) * 100) / 100
+    numDisplay.innerHTML = (num1 - num2).toFixed(2)
   }else if (operatorUsed === '/') {
-    numDisplay.innerHTML = Math.round((num1 / num2) * 100) / 100
+    // numDisplay.innerHTML = Math.round((num1 / num2) * 100) / 100
+    numDisplay.innerHTML = (num1 / num2).toFixed(2)
   }else if (operatorUsed === '*') {
-    numDisplay.innerHTML = Math.round((num1 * num2) * 100) / 100
+    // numDisplay.innerHTML = Math.round((num1 * num2) * 100) / 100
+    numDisplay.innerHTML = (num1 * num2).toFixed(2)
   }
 
   equalHasBeenUsed = true
